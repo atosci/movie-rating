@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: movie-rating
+  labels:
+    app: movie-rating
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: movie-rating
+  template:
+    metadata:
+      labels:
+        app: movie-rating
+    spec:
+      containers:
+        - name: movie-rating
+          image: atosci/movie-rating
+          ports:
+            - containerPort: 80
