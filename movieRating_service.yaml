@@ -2,9 +2,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: movie-rating
-  labels:
-    app: movie-rating
 spec:
-  name: movie-rating
   selector:
     app: movie-rating
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: http
+
