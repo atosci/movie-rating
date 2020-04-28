@@ -1,6 +1,6 @@
 FROM openjdk:8-jre-alpine
 
-EXPOSE 8083
+EXPOSE 80
 
 ADD target/ratings-data-service-0.0.1-SNAPSHOT.jar .
 
