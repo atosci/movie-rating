@@ -1,7 +1,7 @@
 package io.javabrains.ratingsdataservice.resources;
 
 import io.javabrains.ratingsdataservice.model.Rating;
-import io.javabrains.ratingsdataservice.model.UserRating;
+import io.javabrains.ratingsdataservice.model.RatingList;
 import org.junit.Assert;
 import org.junit.jupiter.api.*;
 import org.mockito.Mock;
@@ -28,7 +28,7 @@ public class RatingsResourceTests {
     @DisplayName("Correct getMovieRating(String movieId)")
     public void testCorrectGetMovieRating() {
         String movieId = "foo";
-        int rating = 4;
+        String rating = "4";
 
         Rating expected = new Rating(movieId, rating);
 
@@ -36,7 +36,7 @@ public class RatingsResourceTests {
                 .thenReturn(new Rating(movieId, rating));
 
         Assert.assertEquals(expected.getRating(), ratingsResourceMock.getMovieRating(movieId).getRating());
-        Assert.assertEquals(expected.getMovieId(), ratingsResourceMock.getMovieRating(movieId).getMovieId());
+        Assert.assertEquals(expected.getSource(), ratingsResourceMock.getMovieRating(movieId).getSource());
     }
 
     @Test
@@ -44,15 +44,15 @@ public class RatingsResourceTests {
     public void testCorrectGetUserMovieRatings() {
         String userId = "4";
 
-        UserRating expected = new UserRating();
+        RatingList expected = new RatingList();
         expected.initData(userId);
 
-        UserRating result = new UserRating();
+        RatingList result = new RatingList();
         result.initData(userId);
 
         when(ratingsResourceMock.getUserRatings(eq(userId)))
                 .thenReturn(result);
-        Assert.assertEquals(expected.getUserId(), ratingsResourceMock.getUserRatings(userId).getUserId());
+        //Assert.assertEquals(expected.getMovieTitle(), ratingsResourceMock.getUserRatings(userId).getMovieTitle());
         Assert.assertEquals(expected.getRatings().size(), ratingsResourceMock.getUserRatings(userId).getRatings().size());
 
         compare(expected.getRatings(), ratingsResourceMock.getUserRatings(userId).getRatings());
@@ -60,7 +60,7 @@ public class RatingsResourceTests {
 
     private void compare(List<Rating> expected, List<Rating> result) {
         for (int x =0; x < (expected.size()); x++){
-            Assert.assertEquals(expected.get(x).getMovieId(), result.get(x).getMovieId());
+            Assert.assertEquals(expected.get(x).getSource(), result.get(x).getSource());
             Assert.assertEquals(expected.get(x).getRating(), result.get(x).getRating());
         }
     }

@@ -1,28 +1,38 @@
 package io.javabrains.ratingsdataservice.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Rating {
 
-    private String movieId;
-    private int rating;
+    @JsonProperty("Source")
+    private String source;
 
-    public Rating(String movieId, int rating) {
-        this.movieId = movieId;
+    @JsonProperty("Value")
+    private String rating;
+
+    // default constructor
+    public Rating() {
+
+    }
+
+    public Rating(String source, String rating) {
+        this.source = source;
         this.rating = rating;
     }
 
-    public String getMovieId() {
-        return movieId;
+    public String getSource() {
+        return source;
     }
 
-    public void setMovieId(String movieId) {
-        this.movieId = movieId;
+    public void setSource(String source) {
+        this.source = source;
     }
 
-    public int getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 }
