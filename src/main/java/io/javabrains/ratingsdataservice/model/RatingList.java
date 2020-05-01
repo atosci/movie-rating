@@ -27,9 +27,5 @@ public class RatingList {
     public void setRatings(List<Rating> ratings) {
         this.ratings = ratings;
     }
-
-    public void initData(String movieTitle) {
-        this.setMovieTitle(movieTitle);
-    }
 }
 
