@@ -12,7 +12,6 @@ public class Rating {
 
     // default constructor
     public Rating() {
-
     }
 
     public Rating(String source, String rating) {
