@@ -6,6 +6,8 @@ import org.junit.Assert;
 import org.junit.jupiter.api.*;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import static org.mockito.ArgumentMatchers.eq;
@@ -44,5 +46,13 @@ public class RatingsResourceTests {
 
         Assert.assertNotNull(ratingList);
         Assert.assertNotNull(ratingList.getRatings());
+    }
+
+    @Test
+    public void throwIOExceptionGetUserMovieRatings() {
+        RatingList ratingList = ratingsResource.getUserRatings(null);
+
+        Assert.assertNull(ratingList.getRatings());
+        Assert.assertNull(ratingList.getMovieTitle());
     }
 }

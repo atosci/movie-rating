@@ -17,7 +17,7 @@ public class RatingsResource {
 
     private static final Logger LOGGER = Logger.getLogger( RatingsResource.class.getName() );
 
-    private static final String uri = "http://www.omdbapi.com/?t=%s&apikey=cc323c12";
+    private static final String URI = "http://www.omdbapi.com/?t=%s&apikey=cc323c12";
 
     @GetMapping(path = "/movies/{movieTitle}")
     public Rating getMovieRating(@PathVariable("movieTitle") String movieTitle) {
@@ -28,13 +28,18 @@ public class RatingsResource {
     public RatingList getUserRatings(@PathVariable("movieTitle") String movieTitle) {
         RatingList ratingList = new RatingList();
         RestTemplate restTemplate = new RestTemplate();
-
-        String result = restTemplate.getForObject(String.format(uri, movieTitle), String.class);
         ObjectMapper objectMapper = new ObjectMapper();
+        String result;
 
         try {
+            if (movieTitle == null) {
+                throw new IOException();
+            }
+
+            result = restTemplate.getForObject(String.format(URI, movieTitle), String.class);
             JsonNode root = objectMapper.readTree(result);
             Rating[] list = objectMapper.readValue(root.get("Ratings").toString(), Rating[].class);
+
             ratingList.setRatings(Arrays.asList(list));
             ratingList.setMovieTitle(movieTitle);
         } catch (IOException e) {
