@@ -8,15 +8,15 @@ public class Rating {
     private String source;
 
     @JsonProperty("Value")
-    private String rating;
+    private String value;
 
     // default constructor
     public Rating() {
     }
 
-    public Rating(String source, String rating) {
+    public Rating(String source, String value) {
         this.source = source;
-        this.rating = rating;
+        this.value = value;
     }
 
     public String getSource() {
@@ -27,11 +27,11 @@ public class Rating {
         this.source = source;
     }
 
-    public String getRating() {
-        return rating;
+    public String getValue() {
+        return value;
     }
 
-    public void setRating(String rating) {
-        this.rating = rating;
+    public void setValue(String value) {
+        this.value = value;
     }
 }

@@ -36,7 +36,7 @@ public class RatingsResourceTests {
         RatingsResource ratingsResource = new RatingsResource();
         Rating expected = ratingsResource.getMovieRating(movieTitle1);
         Assert.assertEquals(new Rating(movieTitle1, value).getSource(), expected.getSource());
-        Assert.assertEquals(new Rating(movieTitle1, value).getRating(), expected.getRating());
+        Assert.assertEquals(new Rating(movieTitle1, value).getValue(), expected.getValue());
     }
 
     @Test

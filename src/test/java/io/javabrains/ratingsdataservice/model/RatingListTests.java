@@ -8,6 +8,7 @@ public class RatingListTests {
 
     @Test
     public void validateUserRatingGettersSettersTest() {
+
         PojoTestUtils.ValidateAccessors(RatingList.class);
     }
 
