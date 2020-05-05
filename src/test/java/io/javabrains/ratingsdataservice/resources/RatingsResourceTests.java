@@ -3,11 +3,15 @@ package io.javabrains.ratingsdataservice.resources;
 import io.javabrains.ratingsdataservice.model.Rating;
 import io.javabrains.ratingsdataservice.model.RatingList;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.jupiter.api.*;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import static org.mockito.ArgumentMatchers.eq;
@@ -21,6 +25,9 @@ public class RatingsResourceTests {
     private static RatingList ratingList1 = new RatingList();
     private RatingsResource ratingsResource;
 
+    @Rule
+    public MockitoRule rule = MockitoJUnit.rule();
+
     @BeforeEach
     public void init() {
         ratingList1.setMovieTitle(movieTitle1);
@@ -31,7 +38,7 @@ public class RatingsResourceTests {
 
     @Test
     public void testCorrectGetMovieRating() {
-        String value = "5"; // default value for GetMovieRating()
+        String value = "5";
 
         RatingsResource ratingsResource = new RatingsResource();
         Rating expected = ratingsResource.getMovieRating(movieTitle1);
@@ -42,10 +49,27 @@ public class RatingsResourceTests {
     @Test
     public void testCorrectGetUserMovieRatings() {
 
-        RatingList ratingList = ratingsResource.getUserRatings(movieTitle1);
+       // String expected = "\Ratings\":["{"Source":"Internet Movie Database","Value":"7.8/10"},{"Source":"Rotten Tomatoes","Value":"89%"},{"Source":"Metacritic","Value":"75/100"}]";
+        RatingList expected = new RatingList();
+        expected.setMovieTitle(movieTitle1);
+        expected.setRatings(new ArrayList<Rating>() {{
+            add(new Rating("Internet Movie Database", "7.8/10"));
+            add(new Rating("Rotten Tomatoes", "89%"));
+            add(new Rating("Metacritic", "75/100"));
+        }});
 
-        Assert.assertNotNull(ratingList);
-        Assert.assertNotNull(ratingList.getRatings());
+        RatingList result = ratingsResource.getUserRatings(movieTitle1);
+
+        Assert.assertNotNull(result);
+        Assert.assertEquals(expected.getMovieTitle(), result.getMovieTitle());
+        compare(expected.getRatings(), result.getRatings());
+    }
+
+    private void compare(List<Rating> expected, List<Rating> result) {
+        for (int x =0; x < (expected.size()); x++){
+            Assert.assertEquals(expected.get(x).getSource(), result.get(x).getSource());
+            Assert.assertEquals(expected.get(x).getValue(), result.get(x).getValue());
+        }
     }
 
     @Test
