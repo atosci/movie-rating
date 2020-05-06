@@ -37,9 +37,7 @@ public class RatingsResource {
             }
 
             result = restTemplate.getForObject(String.format(URI, movieTitle), String.class);
-            System.out.println(result);
             JsonNode root = objectMapper.readTree(result);
-            System.out.println(root.get("Ratings").toString());
 
             Rating[] list = objectMapper.readValue(root.get("Ratings").toString(), Rating[].class);
 
