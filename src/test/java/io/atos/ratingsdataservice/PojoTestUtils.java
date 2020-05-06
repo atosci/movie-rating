@@ -1,4 +1,4 @@
-package io.javabrains.ratingsdataservice;
+package io.atos.ratingsdataservice;
 import com.openpojo.reflection.impl.PojoClassFactory;
 import com.openpojo.validation.Validator;
 import com.openpojo.validation.ValidatorBuilder;

@@ -1,9 +1,9 @@
-package io.javabrains.ratingsdataservice.resources;
+package io.atos.ratingsdataservice.resources;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.javabrains.ratingsdataservice.model.Rating;
-import io.javabrains.ratingsdataservice.model.RatingList;
+import io.atos.ratingsdataservice.model.Rating;
+import io.atos.ratingsdataservice.model.RatingList;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import java.io.IOException;

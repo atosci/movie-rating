@@ -1,6 +1,6 @@
-package io.javabrains.ratingsdataservice.model;
+package io.atos.ratingsdataservice.model;
 
-import io.javabrains.ratingsdataservice.PojoTestUtils;
+import io.atos.ratingsdataservice.PojoTestUtils;
 import org.junit.Assert;
 import org.junit.Test;
 

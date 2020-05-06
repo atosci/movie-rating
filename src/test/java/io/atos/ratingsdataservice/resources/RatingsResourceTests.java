@@ -1,21 +1,17 @@
-package io.javabrains.ratingsdataservice.resources;
+package io.atos.ratingsdataservice.resources;
 
-import io.javabrains.ratingsdataservice.model.Rating;
-import io.javabrains.ratingsdataservice.model.RatingList;
+import io.atos.ratingsdataservice.model.Rating;
+import io.atos.ratingsdataservice.model.RatingList;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.jupiter.api.*;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
 
 public class RatingsResourceTests {
 

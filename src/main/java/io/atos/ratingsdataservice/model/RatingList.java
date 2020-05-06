@@ -1,4 +1,4 @@
-package io.javabrains.ratingsdataservice.model;
+package io.atos.ratingsdataservice.model;
 
 import java.util.List;
 
