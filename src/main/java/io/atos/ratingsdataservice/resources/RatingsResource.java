@@ -43,7 +43,7 @@ public class RatingsResource {
 
             ratingList.setRatings(Arrays.asList(list));
             ratingList.setMovieTitle(movieTitle);
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOGGER.log(Level.WARNING, e.toString());
         }
         return ratingList;
