@@ -33,7 +33,7 @@ public class RatingsResource {
 
         try {
             if (movieTitle == null) {
-                throw new IOException();
+                throw new NullPointerException();
             }
 
             result = restTemplate.getForObject(String.format(URI, movieTitle), String.class);
