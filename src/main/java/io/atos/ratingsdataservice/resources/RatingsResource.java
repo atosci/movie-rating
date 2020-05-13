@@ -10,7 +10,10 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+/**
+ * @author Mohamed El Kawakibi
+ * @author Puck School
+ */
 @RestController
 @RequestMapping("/ratingsdata")
 public class RatingsResource {
@@ -33,7 +36,7 @@ public class RatingsResource {
 
         try {
             if (movieTitle == null) {
-                throw new IOException();
+                throw new NullPointerException();
             }
 
             result = restTemplate.getForObject(String.format(URI, movieTitle), String.class);

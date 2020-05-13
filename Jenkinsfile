@@ -1,6 +1,7 @@
 pipeline {
     environment {
-        registry = "atosci/movie-rating"
+        app = "movie-rating"
+        registry = "atosci/${app}"
         registryCredential = 'dockerhub_atosci'
         branchName = "${BRANCH_NAME}"
     }
@@ -19,6 +20,7 @@ pipeline {
                  sh 'mvn test'
             }
         }
+        
         stage('Sonarqube analysis') {
             environment {
                     scannerHome = tool 'SonarQube Scanner'
@@ -32,6 +34,7 @@ pipeline {
                 }
             }
         }
+        
         stage("Quality Gate") {
             steps {
                 timeout(time: 1, unit: 'HOURS') {
@@ -42,14 +45,12 @@ pipeline {
             }
         }
         
-        
         stage('Building and Pushing docker image') {
             environment{
                 dockerHome = tool 'docker'
             }
             steps {
                script {
-                   
                    if ( branchName == 'develop' || branchName == 'hotfix' ) {
                      docker.withServer('tcp://dockerapp:2375', '') {                    
                          docker.withRegistry('', registryCredential) {
@@ -69,6 +70,7 @@ pipeline {
                 withKubeConfig([credentialsId: 'Kubeconfig_file', serverUrl: 'https://kubeclustercontinuousintegration-dns-c66cbf56.hcp.westeurope.azmk8s.io:443']){
                     sh 'kubectl apply -f deploy.yaml -n ${BRANCH_NAME} '
                     sh 'kubectl apply -f service.yaml -n ${BRANCH_NAME} '
+                    sh 'kubectl delete pods -l app=${app} -n ${BRANCH_NAME}'
                   }
             }
         }
