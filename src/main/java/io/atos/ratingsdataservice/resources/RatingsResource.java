@@ -22,11 +22,20 @@ public class RatingsResource {
 
     private static final String URI = "http://www.omdbapi.com/?t=%s&apikey=cc323c12";
 
+    /** Gets a rating for a movie
+     * @param movieTitle A String representing the movie title
+     * @return A rating representing
+     */
     @GetMapping(path = "/movies/{movieTitle}")
     public Rating getMovieRating(@PathVariable("movieTitle") String movieTitle) {
         return new Rating(movieTitle, "5");
     }
 
+    /** Gets a list of ratings for a movie
+     * @param movieTitle A String representing the movie title
+     * @return A list of ratings for the movie,
+     * if no ratings can be found, an empty list will be returned
+     */
     @GetMapping(path = "/user/{movieTitle}")
     public RatingList getUserRatings(@PathVariable("movieTitle") String movieTitle) {
         RatingList ratingList = new RatingList();
