@@ -1,4 +1,4 @@
-package io.javabrains.ratingsdataservice;
+package io.atos.ratingsdataservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
